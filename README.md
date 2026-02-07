@@ -78,10 +78,10 @@ The package outputs comparison metrics between different embeddings:
 
 ## How It Works
 
-1. For each batch, the tool calculates centroids for each cell type in the embedding space
-2. Pairwise distances between cell types are computed to establish relationship graphs
-3. A consensus relationship graph is derived by combining information across all batches
-4. Each embedding is evaluated by comparing its cell type relationships to the consensus
+1. **Build a PCA-based consensus reference**: For each batch, the top 1000 highly variable genes (HVG) are selected, and PCA (10 components) is computed on these HVGs. Trimmed-mean centroids for each cell type are calculated in this PCA space, and pairwise distances between centroids are recorded. The per-batch distance matrices are then averaged across all batches to form a consensus reference that captures robust cell-type relationships.
+2. **Evaluate embeddings against the consensus**: For each embedding in `adata.obsm` (or those specified by `obsm_keys`), the same centroid and pairwise distance procedure is applied. The resulting distance matrix is compared to the PCA consensus via Spearman correlation (Rank-PCA), Pearson correlation (Corr-PCA), and distance-weighted Pearson correlation (Corr-Weighted).
+
+Note: HVG selection and PCA are only used to build the consensus reference. The embeddings being evaluated are used as-is from `adata.obsm`.
 
 ## Requirements
 
