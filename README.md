@@ -18,7 +18,7 @@ A tool for evaluating single-cell embeddings using graph-based relationships. Th
 
 ```bash
 # conda create -n scgraph python=3.10 # to create another conda environment if necessary
-pip install scgraph-eval
+pip install scgraph-bench
 ```
 
 ## Usage
@@ -70,10 +70,10 @@ If `obsm_keys` is not specified, all embeddings in `adata.obsm` will be evaluate
 
 ```bash
 # Evaluate all embeddings
-scgraph-eval --adata_path path/to/data.h5ad --batch_key batch --label_key cell_type --savename results
+scgraph-bench --adata_path path/to/data.h5ad --batch_key batch --label_key cell_type --savename results
 
 # Evaluate specific embeddings only
-scgraph-eval --adata_path path/to/data.h5ad --obsm_keys X_umap X_scVI --savename results
+scgraph-bench --adata_path path/to/data.h5ad --obsm_keys X_umap X_scVI --savename results
 ```
 
 ## Output
