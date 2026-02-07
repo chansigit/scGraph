@@ -74,7 +74,7 @@ scgraph-bench --adata_path path/to/data.h5ad --obsm_keys X_umap X_scVI --savenam
 The package outputs comparison metrics between different embeddings:
 - Rank-PCA: Spearman correlation with PCA-based relationships
 - Corr-PCA: Pearson correlation with PCA-based relationships
-- Corr-Weighted: Weighted correlation considering distance-based importance
+- Corr-Weighted: Weighted correlation considering distance-based importance (reported as scGraph scores in the paper _Limitations of cell embedding metrics assessed using drifting islands, Nature Biotechnology 2025_.)
 
 ## How It Works
 
