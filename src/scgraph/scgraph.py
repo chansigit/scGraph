@@ -10,7 +10,7 @@ from tqdm.auto import tqdm
 
 class scGraph:
     def __init__(self, adata=None, adata_path=None, batch_key="batch", label_key="cell_type",
-                 obsm_keys=None, only_umap=True, trim_rate=0.05, thres_batch=100, thres_celltype=10):
+                 obsm_keys=None, trim_rate=0.05, thres_batch=100, thres_celltype=10):
 
         self.trim_rate = trim_rate
         self.thres_batch = thres_batch
@@ -27,7 +27,6 @@ class scGraph:
             raise ValueError("Either 'adata' or 'adata_path' must be provided.")
         self.batch_key = batch_key
         self.label_key = label_key
-        self.only_umap = only_umap
         self.obsm_keys = [obsm_keys] if isinstance(obsm_keys, str) else obsm_keys
 
     def preprocess(self):
@@ -135,9 +134,6 @@ class scGraph:
         # self.concensus_df_pca.to_csv("concensus_df_pca_%s.csv"%self.trim_rate)
         # exit()
         for _obsm in _obsm_list:
-            
-            if self.only_umap and self.adata.obsm[_obsm].shape[1] != 2:
-                continue
             adata_df = self.adata_concensus(_obsm)
             _row_df = pd.DataFrame(
                 {
@@ -173,8 +169,6 @@ def main():
                         help="Minimum number of cells in each cell type")
     parser.add_argument("--savename", type=str, default="scgraph", 
                         help="file name to save the results")
-    parser.add_argument("--only_umap", action="store_true",
-                        help="If set, only consider embeddings with exactly 2 dimensions")
     args = parser.parse_args()
 
     scgraph = scGraph(
@@ -185,7 +179,6 @@ def main():
         trim_rate=args.trim_rate,
         thres_batch=args.thres_batch,
         thres_celltype=args.thres_celltype,
-        only_umap=args.only_umap
         )
     results = scgraph.main()
     results.to_csv(f"{args.savename}.csv")

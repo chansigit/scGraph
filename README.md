@@ -12,7 +12,7 @@ A tool for evaluating single-cell embeddings using graph-based relationships. Th
 - Process multiple batches to assess embedding consistency
 - Support for both PCA and custom embeddings
 - Built-in handling for highly variable genes (HVG)
-- Option to analyze only 2D embeddings (like UMAP or t-SNE)
+- Configurable embedding selection via `obsm_keys`
 
 ## Installation
 
@@ -28,7 +28,7 @@ pip install scgraph-eval
 ```python
 from scgraph import scGraph
 
-# Initialize the graph analyzer
+# Using a file path
 scgraph = scGraph(
     adata_path="path/to/your/data.h5ad",   # Path to AnnData object
     batch_key="batch",                     # Column name for batch information
@@ -36,7 +36,6 @@ scgraph = scGraph(
     trim_rate=0.05,                        # Trim rate for robust mean calculation
     thres_batch=100,                       # Minimum number of cells per batch
     thres_celltype=10,                     # Minimum number of cells per cell type
-    only_umap=True,                        # Only evaluate 2D embeddings (mostly umaps)
 )
 
 # Run the analysis, return a pandas dataframe
@@ -46,7 +45,7 @@ results = scgraph.main()
 results.to_csv("embedding_evaluation_results.csv")
 ```
 
-You can also pass an AnnData object directly and specify which obsm keys to evaluate:
+You can also pass an AnnData object directly via `adata`, and use `obsm_keys` to select which embeddings to evaluate:
 
 ```python
 import scanpy as sc
@@ -54,6 +53,7 @@ from scgraph import scGraph
 
 adata = sc.read("path/to/your/data.h5ad")
 
+# Evaluate only specific embeddings
 scgraph = scGraph(
     adata=adata,                           # Pass AnnData object directly
     batch_key="batch",
@@ -63,6 +63,8 @@ scgraph = scGraph(
 
 results = scgraph.main()
 ```
+
+If `obsm_keys` is not specified, all embeddings in `adata.obsm` will be evaluated.
 
 ### Command Line Interface
 
