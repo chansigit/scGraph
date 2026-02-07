@@ -1,6 +1,6 @@
 # scgraph-eval
 
-Stand-alone scGraph package for evaluations.
+Stand-alone scGraph package for evaluations. Adapted from https://github.com/Genentech/Islander . 
 Originally written by Hanchen Wang (wang.hanchen@gene.com), Leskovec, Jure and Regev, Aviv.
 
 A tool for evaluating single-cell embeddings using graph-based relationships. This package helps analyze the consistency of cell type relationships across different batches in single-cell data.
