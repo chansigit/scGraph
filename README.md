@@ -7,15 +7,6 @@ A tool for evaluating single-cell embeddings using graph-based relationships. Th
 
 I modified the API for convenience of my use (1. pass AnnData directly, 2. specify obsm keys) following the MIT license.
 
-## Features
-
-- Calculate trimmed means for cell type centroids
-- Compute pairwise distances between cell types
-- Process multiple batches to assess embedding consistency
-- Support for both PCA and custom embeddings
-- Built-in handling for highly variable genes (HVG)
-- Configurable embedding selection via `obsm_keys`
-
 ## Installation
 
 ```bash
