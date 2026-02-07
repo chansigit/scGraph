@@ -5,6 +5,8 @@ Originally written by Hanchen Wang (wang.hanchen@gene.com), Leskovec, Jure and R
 
 A tool for evaluating single-cell embeddings using graph-based relationships. This package helps analyze the consistency of cell type relationships across different batches in single-cell data.
 
+I modified the API for convenience of my use (1. pass AnnData directly, 2. specify obsm keys) following the MIT license.
+
 ## Features
 
 - Calculate trimmed means for cell type centroids
@@ -104,7 +106,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details. 
 
 ## Citation
 
